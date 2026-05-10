@@ -1,0 +1,1 @@
+# CleanArc_CQRS_MediatR
