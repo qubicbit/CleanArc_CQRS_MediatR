@@ -1,6 +1,9 @@
 ﻿using Application.Common.Behaviors;
+
 using FluentValidation;
+
 using MediatR;
+
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Application;
@@ -21,12 +24,6 @@ public static class DependencyInjection
         });
 
         // Registrera AutoMapper och scanna Application-assemblyn
-        // efter alla klasser som ärver från Profile.
-        // Alla mapping-profiler laddas automatiskt.
-        // Replace this line:
-        // services.AddAutoMapper(assembly);
-
-        // With this line:
         services.AddAutoMapper(cfg => { }, assembly);
 
         // Registrera FluentValidation och scanna Application-assemblyn
@@ -37,13 +34,6 @@ public static class DependencyInjection
         // Detta gör att alla Commands/Queries valideras automatiskt
         // innan deras respektive Handlers körs.
         services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
-
-        // Registrera OperationResultBehavior som pipeline-steg u 
-        //services.AddTransient(typeof(IPipelineBehavior<,>), typeof(OperationResultBehavior<,>));
-
-        // Pipeline: 1. Validation → 2. OperationResult → 3. ApiSuccess
-        //services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ApiSuccessBehavior<,>));
-
 
 
         return services;
